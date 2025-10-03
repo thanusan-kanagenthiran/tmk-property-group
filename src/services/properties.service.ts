@@ -1,5 +1,8 @@
 import axiosClient from ".";
 
+/**
+ * Data structure for creating or updating a property
+ */
 export interface PropertyPostData {
   propertyType: string;
   pricePerNight: number;
@@ -15,6 +18,9 @@ export interface PropertyPostData {
 
 const endpoint = "/property";
 
+/**
+ * Filter parameters for property search
+ */
 type FilterParams = {
   propertyType?: string;
   region?: string;
@@ -22,6 +28,11 @@ type FilterParams = {
   checkOut?: string;
 };
 
+/**
+ * Get a list of properties with optional filters
+ * @param filters - Optional filters for property search (propertyType, region, checkIn, checkOut)
+ * @returns Promise with properties list and metadata
+ */
 async function GetProperties(filters: FilterParams = {}): Promise<any> {
   try {
     // Convert filters object to query string
@@ -40,6 +51,11 @@ async function GetProperties(filters: FilterParams = {}): Promise<any> {
   }
 }
 
+/**
+ * Add a new property
+ * @param propertyData - Property data to create
+ * @returns Promise with the created property
+ */
 async function AddProperty(propertyData: PropertyPostData): Promise<any> {
   try {
     const response = await axiosClient.post(endpoint, propertyData);
@@ -50,6 +66,12 @@ async function AddProperty(propertyData: PropertyPostData): Promise<any> {
   }
 }
 
+/**
+ * Update an existing property
+ * @param propertyData - Updated property data
+ * @param id - Property ID to update
+ * @returns Promise with the updated property
+ */
 async function UpdateProperty(propertyData: PropertyPostData, id: string): Promise<any> {
   try {
     const response = await axiosClient.put(`${endpoint}/${id}`, propertyData);
@@ -60,6 +82,10 @@ async function UpdateProperty(propertyData: PropertyPostData, id: string): Promi
   }
 }
 
+/**
+ * Get all available property types
+ * @returns Promise with list of property types
+ */
 async function GetPropertyTypes(): Promise<any> {
   try {
     const response = await axiosClient.get("/property-type");
@@ -70,6 +96,11 @@ async function GetPropertyTypes(): Promise<any> {
   }
 }
 
+/**
+ * Get details of a single property
+ * @param id - Property ID to fetch
+ * @returns Promise with property details
+ */
 async function GetSingleProperty(id: string): Promise<any> {
   try {
     const response = await axiosClient.get(`${endpoint}/${id}`);
@@ -80,6 +111,10 @@ async function GetSingleProperty(id: string): Promise<any> {
   }
 }
 
+/**
+ * Get all properties owned by the current host
+ * @returns Promise with list of host properties
+ */
 async function getHostProperties(): Promise<any> {
   try {
     const response = await axiosClient.get("/property/host");

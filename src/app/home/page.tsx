@@ -25,6 +25,7 @@ import { cities } from "@/components/Properties/Form/PropertyInfoForm";
 import { alpha } from "@mui/material";
 import AvatarMenuOrAuthButtons from "@/components/Auth/AvatarMenuOrAuthButtons";
 import Logo from "@/components/Common/Logo";
+import { flexCenter, fullSize } from "@/constants/styles";
 
 export default function Page() {
   const [properties, setProperties] = useState<any[]>([]);
@@ -256,11 +257,8 @@ export default function Page() {
         {loading ? (
           <Box
             sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              height: "100%",
-              width: "100%",
+              ...flexCenter,
+              ...fullSize,
               minHeight: "30vh",
             }}
           >
@@ -271,11 +269,8 @@ export default function Page() {
         ) : (
           <Box
             sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              height: "100%",
-              width: "100%",
+              ...flexCenter,
+              ...fullSize,
               minHeight: "30vh",
             }}
           >

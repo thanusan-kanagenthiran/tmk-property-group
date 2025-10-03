@@ -1,5 +1,9 @@
 import axiosClient from ".";
 
+/**
+ * Get all bookings for the current user
+ * @returns Promise with list of bookings
+ */
 async function getBookings(): Promise<any> {
   try {
     const response = await axiosClient.get("/property/bookings");
@@ -10,6 +14,11 @@ async function getBookings(): Promise<any> {
   }
 }
 
+/**
+ * Reject a booking request
+ * @param id - Booking ID to reject
+ * @returns Promise with updated booking
+ */
 async function rejectBooking(id: string): Promise<any> {
   try {
     const response = await axiosClient.get(`/bookings/approve-or-reject/${id}?action=reject`);
@@ -20,6 +29,11 @@ async function rejectBooking(id: string): Promise<any> {
   }
 }
 
+/**
+ * Approve a booking request
+ * @param id - Booking ID to approve
+ * @returns Promise with updated booking
+ */
 async function approveBooking(id: string): Promise<any> {
   try {
     const response = await axiosClient.get(`/bookings/approve-or-reject/${id}?action=approve`);
@@ -30,6 +44,11 @@ async function approveBooking(id: string): Promise<any> {
   }
 }
 
+/**
+ * Cancel a booking
+ * @param id - Booking ID to cancel
+ * @returns Promise with updated booking
+ */
 async function cancelBooking(id: string): Promise<any> {
   try {
     const response = await axiosClient.get(`/bookings/cancel-booking/${id}`);

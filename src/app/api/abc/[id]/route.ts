@@ -3,6 +3,12 @@ import { UserModelWithImage } from "@/lib/cloudinary/image-model";
 import { uploadImageToCloudinary } from "@/lib/cloudinary/image-upload";
 import { NextRequest, NextResponse } from "next/server";
 
+/**
+ * GET endpoint to retrieve image details by ID
+ * @param req - Next.js request object
+ * @param params - Route parameters containing the image ID
+ * @returns Image details or 404 error
+ */
 export const GET = async (req: NextRequest, { params }: { params: { id: string } }) => {
   const image = await UserModelWithImage.findOne({ _id: params.id });
   
@@ -19,6 +25,12 @@ export const GET = async (req: NextRequest, { params }: { params: { id: string }
   return NextResponse.json({ data: data }, { status: 200 });
 };
 
+/**
+ * DELETE endpoint to remove an image
+ * @param req - Next.js request object
+ * @param params - Route parameters containing the image ID
+ * @returns Success message or error
+ */
 export const DELETE = async (req: NextRequest, { params }: { params: { id: string } }) => {
   try {
     const public_id = await UserModelWithImage.findOne({ _id: params.id });
@@ -37,6 +49,12 @@ export const DELETE = async (req: NextRequest, { params }: { params: { id: strin
   }
 };
 
+/**
+ * PUT endpoint to update an existing image
+ * @param req - Next.js request object with new image in form data
+ * @param params - Route parameters containing the image ID
+ * @returns Updated image details or error
+ */
 export const PUT = async (req: NextRequest, { params }: { params: { id: string } }) => {
   try {
     const formData = await req.formData();
