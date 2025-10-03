@@ -16,7 +16,13 @@ let theme = createTheme({
     },
   },
   components: {
-   
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          textTransform: "none",
+        },
+      },
+    },
   },
   shape: {
     borderRadius: 6

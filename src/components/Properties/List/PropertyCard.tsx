@@ -13,6 +13,7 @@ import PeopleIcon from "@mui/icons-material/People";
 import { formatCurrency } from "@/lib/util/formatCurrency";
 import { Grid } from "@mui/material";
 import CardActionArea from "@mui/material/CardActionArea";
+import { textEllipsis, hideScrollbar } from "@/constants/styles";
 
 export interface PropertyDTO {
   id: string;
@@ -52,13 +53,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property, isDashboard = fal
           {!isDashboard && <CardMedia sx={{ height: 140, mx: 2, mt: 2 }} className="rounded" image={featureImage} />}
           <CardContent>
             <Typography
-              sx={{
-                overflow: "hidden",
-                display: "-webkit-box",
-                WebkitLineClamp: 1,
-                WebkitBoxOrient: "vertical",
-                height: "auto"
-              }}
+              sx={textEllipsis(1)}
               gutterBottom
               variant="h6"
               component="div">
@@ -69,11 +64,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property, isDashboard = fal
               color="text.secondary"
               mb={1}
               sx={{
-                overflow: "hidden",
-                display: "-webkit-box",
-                WebkitLineClamp: 2,
-                WebkitBoxOrient: "vertical",
-                height: "auto",
+                ...textEllipsis(2),
                 lineHeight: "1.5rem",
                 minHeight: "3rem"
               }}>
@@ -86,8 +77,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property, isDashboard = fal
                 width: "100%",
                 flexWrap: "nowrap",
                 overflowX: "auto",
-                scrollbarWidth: "none",
-                "&::-webkit-scrollbar": { display: "none" }
+                ...hideScrollbar
               }}>
               <Chip
                 icon={<KingBedIcon sx={{ fontSize: 20 }} />}
