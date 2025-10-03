@@ -5,6 +5,11 @@ import { NextRequest, NextResponse } from "next/server";
 
 export const GET = async (req: NextRequest, { params }: { params: { id: string } }) => {
   const image = await UserModelWithImage.findOne({ _id: params.id });
+  
+  if (!image) {
+    return NextResponse.json({ error: "Image not found" }, { status: 404 });
+  }
+  
   const data = {
     id: image._id,
     image_url: image.image_url,

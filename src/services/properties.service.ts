@@ -28,10 +28,10 @@ async function GetProperties(filters: FilterParams = {}): Promise<any> {
     const queryString = new URLSearchParams(filters as any).toString();
     
     // Append query string to the endpoint
-    const endpoint = `/property?${queryString}`;
+    const url = `/property?${queryString}`;
     
     // Make the API request
-    const response = await axiosClient.get(endpoint);
+    const response = await axiosClient.get(url);
     
     return response.data;
   } catch (error) {
@@ -45,7 +45,8 @@ async function AddProperty(propertyData: PropertyPostData): Promise<any> {
     const response = await axiosClient.post(endpoint, propertyData);
     return response.data;
   } catch (error) {
-    throw error;
+    console.error("Error adding property:", error);
+    throw new Error("Failed to add property.");
   }
 }
 
@@ -54,7 +55,8 @@ async function UpdateProperty(propertyData: PropertyPostData, id: string): Promi
     const response = await axiosClient.put(`${endpoint}/${id}`, propertyData);
     return response.data;
   } catch (error) {
-    throw error;
+    console.error("Error updating property:", error);
+    throw new Error("Failed to update property.");
   }
 }
 
@@ -63,7 +65,8 @@ async function GetPropertyTypes(): Promise<any> {
     const response = await axiosClient.get("/property-type");
     return response.data;
   } catch (error) {
-    throw error;
+    console.error("Error fetching property types:", error);
+    throw new Error("Failed to fetch property types.");
   }
 }
 
@@ -72,7 +75,8 @@ async function GetSingleProperty(id: string): Promise<any> {
     const response = await axiosClient.get(`${endpoint}/${id}`);
     return response.data;
   } catch (error) {
-    throw error;
+    console.error("Error fetching property:", error);
+    throw new Error("Failed to fetch property.");
   }
 }
 
@@ -81,7 +85,8 @@ async function getHostProperties(): Promise<any> {
     const response = await axiosClient.get("/property/host");
     return response.data;
   } catch (error) {
-    throw error;
+    console.error("Error fetching host properties:", error);
+    throw new Error("Failed to fetch host properties.");
   }
 }
 
@@ -90,5 +95,6 @@ export const propertiesService = {
   UpdateProperty,
   GetProperties,
   GetPropertyTypes,
-  GetSingleProperty
+  GetSingleProperty,
+  getHostProperties
 };

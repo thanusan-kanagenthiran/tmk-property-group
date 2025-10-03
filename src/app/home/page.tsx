@@ -112,7 +112,6 @@ export default function Page() {
                     sx={{ cursor: "pointer", mr: 1, pr: 2, fontSize: 36 }}
                     onClick={() => {
                       setFilters({ ...filters, propertyType: "" });
-                      handleFilterChange;
                     }}
                   />
                 ),
